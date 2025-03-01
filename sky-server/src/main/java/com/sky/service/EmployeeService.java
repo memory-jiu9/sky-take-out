@@ -1,7 +1,13 @@
 package com.sky.service;
 
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.result.PageResult;
+import com.sky.result.Result;
+
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -12,4 +18,36 @@ public interface EmployeeService {
      */
     Employee login(EmployeeLoginDTO employeeLoginDTO);
 
+    /**
+     * 新增用户
+     * @param employeeDTO
+     */
+    void addEmployee(EmployeeDTO employeeDTO);
+
+    /**
+     * 员工分页
+     * @param employeePageQueryDTO
+     * @return
+     */
+    PageResult getEmployeePageInfo(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 启用/禁用员工
+     * @param id
+     * @param status
+     */
+    void changeStatus(Long id, Integer status);
+
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     */
+    void editEmployee(EmployeeDTO employeeDTO);
+
+    /**
+     * 根据id获取员工信息
+     * @param id
+     * @return
+     */
+    Employee getEmployeeInfoById(Long id);
 }

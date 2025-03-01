@@ -145,6 +145,37 @@ protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 - **/doc.html**：这个路径通常是 Swagger UI 页面默认的访问路径，用户可以通过访问 `http://ip:port/doc.html` 来查看 API 文档页面。
 - **/webjars/**：这个路径映射了 Swagger UI 所需要的 JavaScript、CSS 等资源，这些资源被存储在 `META-INF/resources/webjars/` 目录下。
 
+(3)常用注解
+
+| 注解              | 说明                                                    |
+| ----------------- | ------------------------------------------------------- |
+| @Api              | 作用在类上，作为这个类的说明信息                        |
+| @ApiModel         | 用在模型类上，比如entity、DTO、VO，作为这个类的说明信息 |
+| @ApiModelProperty | 作用在属性上，作为属性的说明信息                        |
+| @ApiOperation     | 作用在方法上，说明方法的作用                            |
+
+```java
+@Api(tags = "员工接口-EmployeeController")
+@ApiOperation("员工登录方法-login")
+@ApiOperation("员工退出登录方法-logout")
+
+@Data
+@ApiModel(description = "员工登录时传递的数据模型")
+public class EmployeeLoginDTO implements Serializable {
+
+    @ApiModelProperty("用户名")
+    private String username;
+
+    @ApiModelProperty("密码")
+    private String password;
+
+}
+```
+
+![2272157](./imgs/2272157.png)
+
+
+
 ## 7.Builder Pattern
 
 Builder Pattern（建造者模式）是一种设计模式，常用于那些复杂对象的创建过程。它将对象的创建和使用分离，允许通过逐步构建对象的各个部分，最后通过 `build()` 方法完成对象的创建。
