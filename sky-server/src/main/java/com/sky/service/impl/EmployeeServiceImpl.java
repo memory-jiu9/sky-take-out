@@ -89,18 +89,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 设置账号状态：1-启用；0-锁定
         employee.setStatus(StatusConstant.ENABLE);
 
-        // 设置创建时间，更新时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-
-        // 设置创建用户，更新用户
-        // 从ThreadLocal中获取用户ID
-        Long id = BaseContext.getCurrentId();
-        employee.setCreateUser(id);
-        employee.setCreateUser(id);
-        // 从ThreadLocal中删除用户ID
-        BaseContext.removeCurrentId();
-
         // 执行插入操作
         employeeMapper.addEmployee(employee);
     }
@@ -141,8 +129,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 设置要更新的值
         employee.setStatus(status);
         employee.setId(id);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
         // 调用updateAll方法
         // 因为对员工的修改除了status，还有其他可以修改的内容
         // 与其分成多个方法，不如都写成一个update方法
@@ -165,8 +151,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .phone(employeeDTO.getPhone())
                 .sex(employeeDTO.getSex())
                 .username(employeeDTO.getUsername())
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
         employeeMapper.update(employee);
     }
